@@ -9,3 +9,10 @@ def decrypt_file(filename, key):
     with open(output_filename, "wb") as file:
         file.write(decrypted_data)
     print(f"Файл {filename} расшифрован как {output_filename}")
+
+def decrypt_folder(folder_path, key):
+    for root, dirs, files in os.walk(folder_path):
+        for file in files:
+            if file.endswith('.encrypted'):
+                filepath = os.path.join(root, file)
+                decrypt_file(filepath, key)
