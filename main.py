@@ -14,18 +14,35 @@ def main():
 
     print("1. Зашифровать файл")
     print("2. Расшифровать файл")
-    choice = input("Выберите действие (1 или 2): ")
+    print("3. Зашифровать папку")
+    print("4. Расшифровать папку")
+    choice = input("Выберите действие (1, 2, 3 или 4): ")
 
     key = load_key()
 
     if choice == '1':
-        filename = input("Введите имя файла для шифрования: ")
-        encrypt_file(filename, key)
+        filepath = choose_file()
+        if filepath:
+            encrypt_file(filepath, key)
+            show_message(f"Файл {filepath} зашифрован.")
     elif choice == '2':
-        filename = input("Введите имя файла для дешифровки (например, file.txt.encrypted): ")
-        decrypt_file(filename, key)
+        filepath = choose_file()
+        if filepath:
+            decrypt_file(filepath, key)
+            show_message(f"Файл {filepath} расшифрован.")
+    elif choice == '3':
+        folderpath = choose_folder()
+        if folderpath:
+            encrypt_folder(folderpath, key)
+            show_message(f"Папка {folderpath} зашифрована.")
+    elif choice == '4':
+        folderpath = choose_folder()
+        if folderpath:
+            decrypt_folder(folderpath, key)
+            show_message(f"Папка {folderpath} расшифрована.")
     else:
         print("Неверный выбор!")
 
 if __name__ == "__main__":
+
     main()
